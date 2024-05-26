@@ -1,4 +1,5 @@
 from datetime import date
+from middleware.processing_time import processing_time
 
 
 class Customer:
@@ -42,6 +43,7 @@ class CustomerAccount(Customer):
     def current_balance(self):
         return self.__balance
 
+    @processing_time
     def withdraw(self, amt: float):
         if self.__balance < amt:
             raise Exception("Balance is not sufficient!")
@@ -50,6 +52,7 @@ class CustomerAccount(Customer):
         print(f"{amt} is withdrawn from your account.")
         print(f"Your balance now is {self.__balance}")
 
+    @processing_time
     def deposit(self, amt: float):
         if amt <= 0:
             raise Exception("Deposit amount should be greater than 0.00!")
