@@ -86,6 +86,9 @@ cmake-build-*/
 # File-based project format
 *.iws
 
+# application log file
+log.txt
+
 # IntelliJ
 out/
 
