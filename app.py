@@ -15,12 +15,17 @@ opt = get_selected_menu()
 
 while opt != "4":
     if opt == "1":
+        fname = input("Input the Customer's first name:")
+        lname = input("Input the Customer's last name:")
+        gender = input("Input the Customer's gender (M=Male, F=Female):")
+        gender = True if gender.lower() == "m" else False
         acc_no = input("Input the Customer's account number:")
         acc_type = input("Input the Customer's type of account:")
         balance = input("Input the Customer's initial deposit amount:")
-        customer = CustomerAccount(acc_no, acc_type, balance)
+        customer = CustomerAccount(fname, lname, gender, acc_no, acc_type)
+        customer.deposit(float(balance))
         records[acc_no] = customer
-        print(f"{customer}is registered into the system.\n")
+        print(f"{customer}\nis registered into the system.\n")
         opt = get_selected_menu()
     elif opt == "2":
         selected_acc_no = input("Enter the Customer's account number:")
@@ -33,7 +38,7 @@ while opt != "4":
     elif opt == "3":
         i = 1
         for key in records.keys():
-            print(f"#{i}")
+            print(f"\nRecord #{i}")
             print(f"{records[key]}\n")
             i += 1
         opt = get_selected_menu()
