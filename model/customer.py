@@ -1,6 +1,6 @@
 from datetime import date
 from middleware.processing_time import processing_time
-
+from middleware.logger import Logger
 
 class Customer:
 
@@ -61,11 +61,27 @@ class CustomerAccount(Customer):
         print(f"{amt} has been added into your account.")
         print(f"Your balance now is {self.__balance}")
   
+    @Logger
     def compare_customer_balance(cust1, cust2):
         if cust1.current_balance() > cust2.current_balance():
             return cust1
      
         return cust2
+    
+    @Logger
+    def calculate_credit_score(cust) -> float:
+        if cust.current_balance() > 0 and cust.current_balance() < 1000:
+            return 0.01
+        if cust.current_balance() > 1000 and cust.current_balance() <= 10000:
+            return 0.05
+        if cust.current_balance() > 10000 and cust.current_balance() <= 50000:
+            return 0.10
+        if cust.current_balance() > 50000 and cust.current_balance() <= 100000:
+            return 0.25
+        if cust.current_balance() > 100000:
+            return 0.50
+
+        return 0.00            
     
     def __str__(self):
         return f"{super().__str__()}Account Number: {self.acc_no}\nType of Account: {self.acc_type}\nCurrent Balance: {self.__balance}"

@@ -4,8 +4,9 @@ def get_selected_menu() -> str:
     return input("""1. Register a new Customer Account
 2. Check Balance of Customer's Account
 3. Show all Records
-4. Exit
-Choose [1-4]:""")
+4. Check Customer Credit Score
+5. Exit
+Choose [1-5]:""")
 
 text = input(f"Welcome to {CustomerAccount.bank_name} CLI system.\nPress Enter to proceed...\n")
 
@@ -13,7 +14,7 @@ records = {}
 
 opt = get_selected_menu()
 
-while opt != "4":
+while opt != "5":
     if opt == "1":
         fname = input("Input the Customer's first name:")
         lname = input("Input the Customer's last name:")
@@ -41,6 +42,14 @@ while opt != "4":
             print(f"\nRecord #{i}")
             print(f"{records[key]}\n")
             i += 1
+        opt = get_selected_menu()
+    elif opt == "4":
+        acc_no = input("Enter the Customer's account number:")
+        selected_customer = records[acc_no] if acc_no in records.keys() else None
+        if selected_customer is not None:
+            print(CustomerAccount.calculate_credit_score(selected_customer))
+        else:
+            print("0.00")
         opt = get_selected_menu()
     else:
         break
